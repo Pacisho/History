@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>ข้อมูลส่วนตัว</title>
+  <title>หน้าหลัก</title>
   <style>
     body {
       margin: 0;
@@ -60,12 +60,42 @@
       display: block;
     }
 
+    .profile-icon {
+      position: relative;
+    }
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      color: #1565c0;
+      top: 50px;
+      left: 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .profile-dropdown button {
+      background: none;
+      border: none;
+      padding: 10px 20px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      color: #1565c0;
+    }
+
+    .profile-dropdown button:hover {
+      background-color: #e3f2fd;
+    }
+
     .main-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 50px 20px;
       flex-wrap: wrap;
+      padding: 30px;
     }
 
     .profile-pic {
@@ -91,24 +121,23 @@
       max-width: 500px;
       margin: 20px;
     }
-
-    .profile-details h2 {
-      color: #1565c0;
-    }
-
-    .profile-details p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">    </div>
+    <div class="profile-icon">
+      <img id="profileIcon" src="images/user.png" alt="profile" style="width:40px;height:40px;border-radius:50%;cursor:pointer;display:none;">
+      <div class="profile-dropdown" id="profileMenu">
+        <button id="showProfile">ดูโปรไฟล์</button>
+        <button id="uploadPicBtn">เพิ่มรูปโปรไฟล์</button>
+        <button id="logout">ออกจากระบบ</button>
+        <input type="file" id="uploadInput" accept="image/*" style="display:none;">
+      </div>
+    </div>
+
     <nav>
       <a href="index.html"><button>หน้าหลัก</button></a>
-
       <div class="dropdown">
         <button>การแนะนำ</button>
         <div class="dropdown-content">
@@ -117,40 +146,88 @@
           <a href="Poongod.html">Poongod</a>
         </div>
       </div>
-
-      <button onclick="alert('อยู่ระหว่างพัฒนา')">เข้าสู่ระบบ</button>
+      <a href="login.html"><button id="loginBtn">เข้าสู่ระบบ</button></a>
       <a href="about.html"><button>เกี่ยวกับเรา</button></a>
     </nav>
   </header>
 
-  <div class="main-container">
+  <center><div class="main-container">
     <div class="profile-pic">
       <img src="images/1746286139434.jpg" alt="Kiw">
     </div>
     <div class="profile-details">
-      <h2>นายศุภศรณ์ บุญประคม (Kiw)</h2>
+      <h2><a href="Kiw.html" style="color: #1565c0; text-decoration: none;">นายศุภศรณ์ บุญประคม (Kiw)</a></h2>
       <p>ชื่อเล่น คิว อายุ 13 ปี<br>โรงเรียนศรีบุญเรื่องวิทยาคาร<br>... (ฯลฯ)</p>
     </div>
-  </div>
+  </div></center>
 
-  <div class="main-container">
+  <center><div class="main-container">
     <div class="profile-pic">
       <img src="images/FB_IMG_1748013245315.jpg" alt="TanKhun">
     </div>
     <div class="profile-details">
-      <h2>นายวัชรวิทย์ แก้วคาม (TanKhun)</h2>
+      <h2><a href="TanKhun.html" style="color: #1565c0; text-decoration: none;">นายวัชรวิทย์ แก้วคาม (TanKhun)</a></h2>
       <p>ชื่อเล่น แทนคุณ อายุ 13 ปี<br>โรงเรียนหนองบัววิทยาคาร<br>... (ฯลฯ)</p>
     </div>
-  </div>
+  </div></center>
 
-  <div class="main-container">
+  <center><div class="main-container">
     <div class="profile-pic">
       <img src="images/FB_IMG_1719938454308.jpg" alt="Poongod">
     </div>
     <div class="profile-details">
-      <h2>นายอิรชา ขุนอินทร์ (Poongod)</h2>
+      <h2><a href="Poongod.html" style="color: #1565c0; text-decoration: none;">นายอิรชา ขุนอินทร์ (Poongod)</a></h2>
       <p>ชื่อเล่น ปุณ อายุ 17 ปี<br>โรงเรียนเตรียมบัณฑิต<br>... (ฯลฯ)</p>
     </div>
-  </div>
+  </div></center>
+
+  <script>
+    const user = localStorage.getItem("loginUser");
+    const profileIcon = document.getElementById("profileIcon");
+    const profileMenu = document.getElementById("profileMenu");
+
+    if (user) {
+      const storedImage = localStorage.getItem("profileImage");
+      if (storedImage) {
+        profileIcon.src = storedImage;
+      }
+
+      profileIcon.style.display = "inline";
+      document.getElementById("loginBtn").style.display = "none";
+
+      profileIcon.onclick = () => {
+        profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
+      };
+
+      document.getElementById("logout").onclick = () => {
+        localStorage.removeItem("loginUser");
+        localStorage.removeItem("profileImage");
+        location.reload();
+      };
+
+      document.getElementById("showProfile").onclick = () => {
+        alert("เข้าสู่ระบบในชื่อ: " + user);
+      };
+
+      // ฟังก์ชันอัปโหลดรูปโปรไฟล์
+      document.getElementById("uploadPicBtn").onclick = () => {
+        document.getElementById("uploadInput").click();
+      };
+
+      document.getElementById("uploadInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const imageDataUrl = e.target.result;
+            profileIcon.src = imageDataUrl;
+            localStorage.setItem("profileImage", imageDataUrl);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
