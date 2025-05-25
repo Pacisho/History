@@ -1,233 +1,124 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>หน้าหลัก</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบข้อมูลบุคคล</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #e8f0fe;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    header {
-      background-color: #1565c0;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-    }
-
-    nav button {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 16px;
-      margin-left: 15px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      color: #1565c0;
-      min-width: 150px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-      border-radius: 5px;
-      top: 40px;
-    }
-
-    .dropdown-content a {
-      color: #1565c0;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #e3f2fd;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .profile-icon {
-      position: relative;
-    }
-
-    .profile-dropdown {
-      display: none;
-      position: absolute;
-      background-color: white;
-      color: #1565c0;
-      top: 50px;
-      left: 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      z-index: 10;
-    }
-
-    .profile-dropdown button {
-      background: none;
-      border: none;
-      padding: 10px 20px;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      color: #1565c0;
-    }
-
-    .profile-dropdown button:hover {
-      background-color: #e3f2fd;
-    }
-
-    .main-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 30px;
-    }
-
-    .profile-pic {
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
+    body, html {
+      height: 100%;
       overflow: hidden;
-      margin: 20px;
-      border: 5px solid #1565c0;
+      background-color: #0a0a0a;
     }
 
-    .profile-pic img {
+    .background {
+      position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      background: radial-gradient(circle at center, #0d47a1 0%, #000000 80%);
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .profile-details {
-      background-color: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin: 20px;
+    .dots {
+      width: 100%;
+      height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.05;
+      animation: moveBg 60s linear infinite;
+    }
+
+    @keyframes moveBg {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      color: white;
+      padding: 20px;
+    }
+
+    .logo-img {
+      width: 180px;
+      height: auto;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #2196f3;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #bbdefb;
+    }
+
+    .button {
+      padding: 15px 30px;
+      background-color: #2196f3;
+      color: #ffffff;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #2196f3;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button:hover {
+      background-color: #1976d2;
+      transform: scale(1.05);
+    }
+
+    .footer-note {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.85rem;
+      color: #90caf9;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
+  <div class="background">
+    <div class="dots"></div>
+  </div>
+  <div class="content">
+    <!-- เพิ่มโลโก้ที่คุณอัปโหลดไว้ -->
+    <img src="images/Messenger_creation_959478FA-CFC3-4599-8CB1-A15CD4BE7B0D.png" alt="โลโก้" class="logo-img" />
 
-  <header>
-    <div class="profile-icon">
-      <img id="profileIcon" src="images/user.png" alt="profile" style="width:40px;height:40px;border-radius:50%;cursor:pointer;display:none;">
-      <div class="profile-dropdown" id="profileMenu">
-        <button id="showProfile">ดูโปรไฟล์</button>
-        <button id="uploadPicBtn">เพิ่มรูปโปรไฟล์</button>
-        <button id="logout">ออกจากระบบ</button>
-        <input type="file" id="uploadInput" accept="image/*" style="display:none;">
-      </div>
-    </div>
-
-    <nav>
-      <a href="index.html"><button>หน้าหลัก</button></a>
-      <div class="dropdown">
-        <button>การแนะนำ</button>
-        <div class="dropdown-content">
-          <a href="Kiw.html">Kiw</a>
-          <a href="TanKhun.html">TanKhun</a>
-          <a href="Poongod.html">Poongod</a>
-        </div>
-      </div>
-      <a href="login.html"><button id="loginBtn">เข้าสู่ระบบ</button></a>
-      <a href="about.html"><button>เกี่ยวกับเรา</button></a>
-    </nav>
-  </header>
-
-  <center><div class="main-container">
-    <div class="profile-pic">
-      <img src="images/1746286139434.jpg" alt="Kiw">
-    </div>
-    <div class="profile-details">
-      <h2><a href="Kiw.html" style="color: #1565c0; text-decoration: none;">นายศุภศรณ์ บุญประคม (Kiw)</a></h2>
-      <p>ชื่อเล่น คิว อายุ 13 ปี<br>โรงเรียนศรีบุญเรื่องวิทยาคาร<br>... (ฯลฯ)</p>
-    </div>
-  </div></center>
-
-  <center><div class="main-container">
-    <div class="profile-pic">
-      <img src="images/FB_IMG_1748013245315.jpg" alt="TanKhun">
-    </div>
-    <div class="profile-details">
-      <h2><a href="TanKhun.html" style="color: #1565c0; text-decoration: none;">นายวัชรวิทย์ แก้วคาม (TanKhun)</a></h2>
-      <p>ชื่อเล่น แทนคุณ อายุ 13 ปี<br>โรงเรียนหนองบัววิทยาคาร<br>... (ฯลฯ)</p>
-    </div>
-  </div></center>
-
-  <center><div class="main-container">
-    <div class="profile-pic">
-      <img src="images/FB_IMG_1719938454308.jpg" alt="Poongod">
-    </div>
-    <div class="profile-details">
-      <h2><a href="Poongod.html" style="color: #1565c0; text-decoration: none;">นายอิรชา ขุนอินทร์ (Poongod)</a></h2>
-      <p>ชื่อเล่น ปุณ อายุ 17 ปี<br>โรงเรียนเตรียมบัณฑิต<br>... (ฯลฯ)</p>
-    </div>
-  </div></center>
-
-  <script>
-    const user = localStorage.getItem("loginUser");
-    const profileIcon = document.getElementById("profileIcon");
-    const profileMenu = document.getElementById("profileMenu");
-
-    if (user) {
-      const storedImage = localStorage.getItem("profileImage");
-      if (storedImage) {
-        profileIcon.src = storedImage;
-      }
-
-      profileIcon.style.display = "inline";
-      document.getElementById("loginBtn").style.display = "none";
-
-      profileIcon.onclick = () => {
-        profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
-      };
-
-      document.getElementById("logout").onclick = () => {
-        localStorage.removeItem("loginUser");
-        localStorage.removeItem("profileImage");
-        location.reload();
-      };
-
-      document.getElementById("showProfile").onclick = () => {
-        alert("เข้าสู่ระบบในชื่อ: " + user);
-      };
-
-      // ฟังก์ชันอัปโหลดรูปโปรไฟล์
-      document.getElementById("uploadPicBtn").onclick = () => {
-        document.getElementById("uploadInput").click();
-      };
-
-      document.getElementById("uploadInput").addEventListener("change", function(event) {
-        const file = event.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const imageDataUrl = e.target.result;
-            profileIcon.src = imageDataUrl;
-            localStorage.setItem("profileImage", imageDataUrl);
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-    }
-  </script>
-
+    <div class="logo">ระบบข้อมูลบุคคล</div>
+    <div class="subtitle">เข้าถึงข้อมูลบุคคลได้อย่างปลอดภัย รวดเร็ว และเป็นระบบ</div>
+    <button class="button" onclick="location.href='about1.html'">เข้าสู่เว็บไซต์หลัก</button>
+  </div>
+  <div class="footer-note">ข้อมูลของท่านได้รับการปกป้องตามมาตรฐานความปลอดภัย</div>
 </body>
 </html>
